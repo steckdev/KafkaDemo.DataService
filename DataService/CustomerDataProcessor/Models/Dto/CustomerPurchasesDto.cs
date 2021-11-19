@@ -9,7 +9,9 @@ namespace CustomerDataProcessor
         public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public EmailAddressAttribute Email { get; set; }
+
+        [EmailAddressAttribute]
+        public string Email { get; set; }
         public AppPurchaseDto Apps { get; set; }
     }
 }

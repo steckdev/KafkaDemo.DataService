@@ -10,7 +10,6 @@ using System.Linq;
 namespace CustomerDataProcessor.Controllers.v1
 {
     [ApiController]
-    [Route("[controller]", Order = 1)]
     [Route("api/v{version:apiVersion}/[controller]", Order = 1)]
     [ApiVersion("1.0")]
     public class CustomerPurchasesController : ControllerBase
@@ -25,6 +24,7 @@ namespace CustomerDataProcessor.Controllers.v1
         }
 
         [HttpGet]
+        [Route("Status")]
         public IActionResult Status()
         {
             //Check dependent services
