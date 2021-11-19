@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using CustomerDataProcessor.Repository;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -56,8 +57,12 @@ namespace CustomerDataProcessor.Controllers.v1
             //Maybe return the items that failed...
             if(failedItems)
                 return new BadRequestResult();
-
             
+            //This should come from the header to be dependency injection
+            var repo = new KafkaDataRepository();
+
+            //replace with async
+            data.Any(x => repo.SaveCustomerData(x));
             return new OkResult();
         }
 

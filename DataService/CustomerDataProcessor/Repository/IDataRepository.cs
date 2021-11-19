@@ -9,6 +9,6 @@ namespace CustomerDataProcessor
     public abstract class IDataRepository
     {
         //set this to domain object type instead of shared DTO
-        public abstract CustomerPurchasesDto SaveCustomerData();
+        public abstract bool SaveCustomerData(CustomerPurchasesDto customerPurchases);
     }
 }
