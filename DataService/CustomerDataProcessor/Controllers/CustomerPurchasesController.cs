@@ -3,9 +3,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
-namespace DataService.Controllers.v1
+namespace CustomerDataProcessor.Controllers.v1
 {
     [ApiController]
     [Route("[controller]", Order = 1)]
@@ -16,6 +17,7 @@ namespace DataService.Controllers.v1
 
         private readonly ILogger<CustomerPurchasesController> _logger;
 
+        //Inject Kafka Service/Repositry  here
         public CustomerPurchasesController(ILogger<CustomerPurchasesController> logger)
         {
             _logger = logger;
@@ -47,23 +49,25 @@ namespace DataService.Controllers.v1
         /// <returns></returns>
         [HttpPost]
         [Route("CustomerData/orders")]
-        public IEnumerable<DataService.CustomerPurchasesDto> CustomerData(IEnumerable<DataService.CustomerPurchasesDto> data)
+        public IActionResult CustomerData(IEnumerable<CustomerDataProcessor.CustomerPurchasesDto> data)
         {
             var failedItems = data.Any(x => ValidateCustomerPurchaseData(x) == false);
-            ValidateCustomerPurchaseData(data);
-            var rng = new Random();
-            if (true)
-                return new List<CustomerPurchasesDto>{
-                    new CustomerPurchasesDto{ Id = 1 }
-                };
-            else
-                return Enumerable.Empty<DataService.CustomerPurchasesDto>();
+
+            //Maybe return the items that failed...
+            if(failedItems)
+                return new BadRequestResult();
+
+            
+            return new OkResult();
         }
 
-         void ValidateCustomerPurchaseData(CustomerPurchasesDto data)
+        private bool ValidateCustomerPurchaseData(CustomerPurchasesDto data)
         {
-            if(data.Id < 0 || data.Email.Contains("@")
-            throw new NotImplementedException();
+            //Validation has been started in the DTO using DataAnnotation
+            if (String.IsNullOrEmpty(data.FirstName) || String.IsNullOrEmpty(data.LastName))
+                return false;
+            else
+                return true;
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DataService
+namespace CustomerDataProcessor
 {
     public class ServiceStatusModel
     {

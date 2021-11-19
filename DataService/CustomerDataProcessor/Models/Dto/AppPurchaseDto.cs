@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace DataService
+namespace CustomerDataProcessor
 {
     public class AppPurchaseDto
     {

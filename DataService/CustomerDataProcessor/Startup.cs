@@ -12,7 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace DataService
+namespace CustomerDataProcessor
 {
     public class Startup
     {
@@ -30,7 +30,7 @@ namespace DataService
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "DataService", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "CustomerDataProcessor", Version = "v1" });
             });
         }
 
@@ -41,7 +41,7 @@ namespace DataService
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "DataService v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "CustomerDataProcessor v1"));
             }
 
             app.UseHttpsRedirection();
