@@ -28,6 +28,7 @@ namespace CustomerDataProcessor
         {
 
             services.AddControllers();
+            services.AddApiVersioning();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CustomerDataProcessor", Version = "v1" });
